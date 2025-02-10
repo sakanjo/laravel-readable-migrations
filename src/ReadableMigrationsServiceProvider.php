@@ -11,6 +11,8 @@ class ReadableMigrationsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerCommands();
         }
+
+        $this->mergeConfigFrom(__DIR__.'/../config/readable-migrations.php', 'readable-migrations');
     }
 
     private function registerCommands(): void

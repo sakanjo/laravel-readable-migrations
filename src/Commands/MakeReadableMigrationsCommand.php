@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 #[AsCommand(name: 'make:readable-migrations')]
 class MakeReadableMigrationsCommand extends Command
 {
-    protected $signature = 'make:readable-migrations {--pad=3} {--gap=1}';
+    protected $signature = 'make:readable-migrations {--pad=} {--gap=}';
 
     protected $description = 'Change migrations filenames to more readable numeric format';
 
@@ -22,8 +22,8 @@ class MakeReadableMigrationsCommand extends Command
 
     public function handle(): int
     {
-        $pad = (int) $this->option('pad');
-        $gap = (int) $this->option('gap');
+        $pad = (int) ($this->option('pad') ?? config('readable-migrations.pad'));
+        $gap = (int) ($this->option('gap') ?? config('readable-migrations.gap'));
 
         $this->components->info('Collecting migrations.');
 
